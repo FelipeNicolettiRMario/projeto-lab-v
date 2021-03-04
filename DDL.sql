@@ -36,7 +36,7 @@ create table tmj_time_jogador(
     foreign key(tmj_time) references tme_time(tme_id),
     foreign key(tmj_jogador) references  jgd_jogador(jgd_id),
 
-    unique key uni_jogador_time(tmj_time)
+    unique key uni_jogador_time(tmj_jogador)
 );
 
 
