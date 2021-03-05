@@ -17,6 +17,8 @@ create table jgd_jogador(
 create table cch_coach(
     cch_id bigint not null auto_increment,
     cch_nome varchar(30) not null,
+    cch_time bigint,
+    foreign key (cch_time) references tme_time(tme_id),
     primary key(cch_id),
     unique key uni_coach_nome(cch_nome)
 );
