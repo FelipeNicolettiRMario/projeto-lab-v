@@ -1,6 +1,9 @@
 package com.fatec.sp.gov.br.teamLol;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.util.HashSet;
 
 import com.fatec.sp.gov.br.teamLol.entity.Coach;
 import com.fatec.sp.gov.br.teamLol.entity.Jogador;
@@ -46,6 +49,21 @@ class TeamLolApplicationTests {
     }
 
     @Test
+    void testaInsercaoJogadorComTime(){
+        Time time = new Time();
+        time.setNome("Vivo Keyd");
+
+        timeRepo.save(time);
+
+        Jogador jogador = new Jogador();
+        jogador.setNick("Varian");
+        jogador.setRank("Platina");
+        jogador.setTime(time);
+
+        assertNotNull(jogador.getTime().getId());
+    }
+
+    @Test
     void testaInsercaoCoach(){
         Coach coach = new Coach();
         coach.setNome("Invictus");
@@ -80,7 +98,23 @@ class TeamLolApplicationTests {
 
         assertNotNull(time.getCoach());
 
+    }
 
+    @Test
+    void testaInsercaoTimeComJogador(){
+        Time time = new Time();
+        time.setNome("T1");
+        time.setJogadores(new HashSet<Jogador>());
+
+        Jogador jogador = new Jogador();
+        jogador.setNick("Aslan");
+        jogador.setRank("Ouro");
+
+        jogadorRepo.save(jogador);
+
+        time.getJogadores().add(jogador);
+
+        assertEquals("Aslan",time.getJogadores().iterator().next().getNick());
     }
 
 }

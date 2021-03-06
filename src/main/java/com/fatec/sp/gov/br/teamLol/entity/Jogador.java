@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,13 +16,17 @@ public class Jogador{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "jgd_id")
-    public Long id;
+    private Long id;
     
     @Column(name = "jgd_nick")
-    public String nick;
+    private String nick;
 
     @Column(name = "jgd_rank")
-    public String rank;
+    private String rank;
+
+    @ManyToOne
+    @JoinColumn(name = "jgd_time")
+    private Time time;
 
     public Long getId() {
         return id;
@@ -44,5 +50,13 @@ public class Jogador{
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 }

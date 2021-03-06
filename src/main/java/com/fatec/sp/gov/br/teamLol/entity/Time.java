@@ -1,11 +1,14 @@
 package com.fatec.sp.gov.br.teamLol.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,6 +27,9 @@ public class Time {
     @OneToOne
     @JoinColumn(name = "tme_coach",referencedColumnName = "cch_id")
     private Coach coach;
+
+    @OneToMany(mappedBy = "time")
+    public Set<Jogador> jogadores;
 
     public Long getId() {
         return id;
@@ -47,6 +53,14 @@ public class Time {
 
     public void setCoach(Coach coach) {
         this.coach = coach;
+    }
+
+    public Set<Jogador> getJogadores() {
+        return jogadores;
+    }
+
+    public void setJogadores(Set<Jogador> jogadores) {
+        this.jogadores = jogadores;
     }
     
 }
