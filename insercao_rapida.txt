@@ -2,3 +2,7 @@ insert into jgd_jogador(jgd_nick,jgd_rank) values("rexpeita","Diamante");
 insert into cch_coach(cch_nome) values("Invictus");
 insert into tme_time(tme_nome,tme_coach) values ("Pain",1);
 insert into tmj_time_jogador(tmj_time,tmj_jogador) values(1,1);
+
+insert into cch_coach(cch_nome) values ("Leslie");
+insert into tme_time(tme_nome,tme_coach) values ("Pain",3)
+insert into jgd_jogador(jgd_nick,jgd_rank,jgd_time) values ("Kami","Mestre",6);

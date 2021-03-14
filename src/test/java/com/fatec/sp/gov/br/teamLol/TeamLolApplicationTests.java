@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import com.fatec.sp.gov.br.teamLol.entity.Coach;
 import com.fatec.sp.gov.br.teamLol.entity.Jogador;
@@ -76,7 +77,7 @@ class TeamLolApplicationTests {
     @Test
     void testaInsercaoTime(){
         Time time = new Time();
-        time.setNome("Pain");
+        time.setNome("Red Canids");
 
         timeRepo.save(time);
 
@@ -91,7 +92,7 @@ class TeamLolApplicationTests {
         coachRepo.save(coach);
 
         Time time = new Time();
-        time.setNome("Pain");
+        time.setNome("Red Canids");
         time.setCoach(coach);
 
         timeRepo.save(time);
@@ -113,8 +114,18 @@ class TeamLolApplicationTests {
         jogadorRepo.save(jogador);
 
         time.getJogadores().add(jogador);
+        timeRepo.save(time);
 
         assertEquals("Aslan",time.getJogadores().iterator().next().getNick());
     }
 
+    @Test
+    void testaBuscaPorCoachETime(){
+        Time time = timeRepo.findByNome("Pain");
+        Coach coach = coachRepo.findByNome("Leslie");
+
+        Set<Jogador> jogadores = timeRepo.findJogadoresByCoachAndTime(coach.getNome(), time.getNome());
+
+        assertEquals("Kami", jogadores.iterator().next().getNick());
+    }
 }
