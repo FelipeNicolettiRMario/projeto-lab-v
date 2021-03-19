@@ -12,6 +12,8 @@ import com.fatec.sp.gov.br.teamLol.entity.Time;
 import com.fatec.sp.gov.br.teamLol.repository.CoachRepository;
 import com.fatec.sp.gov.br.teamLol.repository.JogadorRepository;
 import com.fatec.sp.gov.br.teamLol.repository.TimeRepository;
+import com.fatec.sp.gov.br.teamLol.service.JogadorService;
+import com.fatec.sp.gov.br.teamLol.service.JogadorServiceImpl;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ class TeamLolApplicationTests {
 
     @Autowired
     private TimeRepository timeRepo;
+
+    @Autowired
+    private JogadorService jogadorService;
 
 	@Test
 	void contextLoads() {
@@ -127,5 +132,14 @@ class TeamLolApplicationTests {
         Set<Jogador> jogadores = timeRepo.findJogadoresByCoachAndTime(coach.getNome(), time.getNome());
 
         assertEquals("Kami", jogadores.iterator().next().getNick());
+    }
+
+    @Test
+    void testaServiceJogador(){
+        Jogador jogador = jogadorService.adicionarJogador("BRTT","Mestre");
+        
+        assertNotNull(jogador.getId());
+
+
     }
 }

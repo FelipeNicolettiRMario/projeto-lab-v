@@ -32,5 +32,7 @@ create table jgd_jogador(
     unique key uni_jogador_nick(jgd_nick)
 );
 
-
+insert into cch_coach(cch_nome) values ("Leslie");
+insert into tme_time(tme_nome,tme_coach) values ("Pain",1);
+insert into jgd_jogador(jgd_nick,jgd_rank,jgd_time) values ("Kami","Mestre",1);
 
