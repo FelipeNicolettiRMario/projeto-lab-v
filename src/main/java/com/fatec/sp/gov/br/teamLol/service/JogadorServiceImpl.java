@@ -17,11 +17,12 @@ public class JogadorServiceImpl implements JogadorService {
 
     @Override
     @Transactional
-    public Jogador adicionarJogador(String nick, String rank) {
+    public Jogador adicionarJogador(String nick, String rank,String senha) {
 
         Jogador jogador = new Jogador();
         jogador.setNick(nick);
         jogador.setRank(rank);
+        jogador.setSenha(senha);
         
         jogadorRepo.save(jogador);
 

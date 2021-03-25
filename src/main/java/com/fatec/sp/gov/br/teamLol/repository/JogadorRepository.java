@@ -11,4 +11,6 @@ public interface JogadorRepository extends JpaRepository<Jogador,Long>{
     @Query("SELECT j.time.coach from Jogador j inner join j.time where j.nick = ?1")
     public Coach findCoachFromJogador(String nome);
 
+    public Jogador findJogadorByNickAndSenha(String nick,String senha);
+
 }

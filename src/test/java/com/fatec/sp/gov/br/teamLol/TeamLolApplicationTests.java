@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashSet;
-import java.util.Set;
 
 import com.fatec.sp.gov.br.teamLol.entity.Coach;
 import com.fatec.sp.gov.br.teamLol.entity.Jogador;
@@ -13,7 +12,6 @@ import com.fatec.sp.gov.br.teamLol.repository.CoachRepository;
 import com.fatec.sp.gov.br.teamLol.repository.JogadorRepository;
 import com.fatec.sp.gov.br.teamLol.repository.TimeRepository;
 import com.fatec.sp.gov.br.teamLol.service.JogadorService;
-import com.fatec.sp.gov.br.teamLol.service.JogadorServiceImpl;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,10 +136,17 @@ class TeamLolApplicationTests {
 
     @Test
     void testaServiceJogador(){
-        Jogador jogador = jogadorService.adicionarJogador("BRTT","Mestre");
+        Jogador jogador = jogadorService.adicionarJogador("BRTT","Mestre","1234");
         
         assertNotNull(jogador.getId());
 
 
+    }
+
+    @Test
+    void testaValidacaoJogador(){
+        Jogador jogador = jogadorRepo.findJogadorByNickAndSenha("Kami", "1234");
+
+        assertNotNull(jogador.getId());
     }
 }
