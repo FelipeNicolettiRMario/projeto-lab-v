@@ -20,6 +20,9 @@ public class Coach {
     @Column(name = "cch_nome")
     private String nome;
 
+    @Column(name = "cch_senha")
+    private String senha;
+
     public Long getId() {
         return id;
     }
@@ -34,6 +37,14 @@ public class Coach {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     
 }

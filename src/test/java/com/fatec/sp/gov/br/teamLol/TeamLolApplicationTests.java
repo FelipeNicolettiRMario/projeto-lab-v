@@ -47,6 +47,7 @@ class TeamLolApplicationTests {
         Jogador jogador = new Jogador();
         jogador.setNick("Nefarian");
         jogador.setRank("Ouro");
+        jogador.setSenha("1234");
 
         jogadorRepo.save(jogador);
 
@@ -65,6 +66,7 @@ class TeamLolApplicationTests {
         jogador.setNick("Varian");
         jogador.setRank("Platina");
         jogador.setTime(time);
+        jogador.setSenha("1234");
 
         assertNotNull(jogador.getTime().getId());
     }
@@ -73,6 +75,7 @@ class TeamLolApplicationTests {
     void testaInsercaoCoach(){
         Coach coach = new Coach();
         coach.setNome("Invictus");
+        coach.setSenha("1234");
         
         coachRepo.save(coach);
 
@@ -93,6 +96,7 @@ class TeamLolApplicationTests {
     void testaInsercaoTimeComCoach(){
         Coach coach = new Coach();
         coach.setNome("Invicutos");
+        coach.setSenha("1234");
 
         coachRepo.save(coach);
 
@@ -115,6 +119,7 @@ class TeamLolApplicationTests {
         Jogador jogador = new Jogador();
         jogador.setNick("Aslan");
         jogador.setRank("Ouro");
+        jogador.setSenha("1234");
 
         jogadorRepo.save(jogador);
 

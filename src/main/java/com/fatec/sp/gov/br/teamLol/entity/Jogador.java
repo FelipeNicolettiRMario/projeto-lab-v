@@ -24,6 +24,9 @@ public class Jogador{
     @Column(name = "jgd_rank")
     private String rank;
 
+    @Column(name = "jgd_senha")
+    private String senha;
+
     @ManyToOne
     @JoinColumn(name = "jgd_time")
     private Time time;
@@ -58,5 +61,13 @@ public class Jogador{
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
