@@ -125,13 +125,10 @@ class TeamLolApplicationTests {
     }
 
     @Test
-    void testaBuscaPorCoachETime(){
-        Time time = timeRepo.findByNome("Pain");
-        Coach coach = coachRepo.findByNome("Leslie");
+    void testaProcuraCoachPorJogador(){
+        Coach coach = jogadorRepo.findCoachFromJogador("Kami");
 
-        Set<Jogador> jogadores = timeRepo.findJogadoresByCoachAndTime(coach.getNome(), time.getNome());
-
-        assertEquals("Kami", jogadores.iterator().next().getNick());
+        assertNotNull(coach.getId());
     }
 
     @Test
