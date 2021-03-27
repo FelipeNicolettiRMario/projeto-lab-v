@@ -136,11 +136,20 @@ class TeamLolApplicationTests {
 
     @Test
     void testaServiceJogador(){
-        Jogador jogador = jogadorService.adicionarJogador("BRTT","Mestre","1234");
+        Jogador jogador = jogadorService.adicionarJogador("BRTT","Mestre","1234","Pain");
         
         assertNotNull(jogador.getId());
 
 
+    }
+
+    @Test
+    void testaServiceWithFakeTeam(){
+        Jogador jogador = jogadorService.adicionarJogador("BRTT","Mestre","1234","Liga");
+
+        Time time = timeRepo.findTimeByNome("Liga");
+
+        assertNotNull(time.getId());
     }
 
     @Test

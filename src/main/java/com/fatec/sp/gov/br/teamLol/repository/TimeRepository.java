@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TimeRepository extends JpaRepository<Time,Long>{
     
-    public Time findByNome(String nome);
+    public Time findTimeByNome(String nome);
 }
