@@ -8,6 +8,7 @@ import com.fatec.sp.gov.br.teamLol.repository.TimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.*;
 
 
 @Service("jogadorService")
@@ -41,6 +42,11 @@ public class JogadorServiceImpl implements JogadorService {
         jogadorRepo.save(jogador);
 
         return jogador;
+    }
+
+    @Override
+    public List<Jogador> buscarTodosJogadores(){
+        return jogadorRepo.findAll();
     }
     
 }
