@@ -5,6 +5,7 @@ import com.fatec.sp.gov.br.teamLol.entity.Time;
 import com.fatec.sp.gov.br.teamLol.repository.JogadorRepository;
 import com.fatec.sp.gov.br.teamLol.repository.TimeRepository;
 
+import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +48,20 @@ public class JogadorServiceImpl implements JogadorService {
     @Override
     public List<Jogador> buscarTodosJogadores(){
         return jogadorRepo.findAll();
+    }
+
+    @Override
+    public Optional<Jogador> atualizarJogador(String novoNick,String novoElo,Long id) {
+
+        jogadorRepo.updateJogador(novoNick,novoElo,id);
+
+        Optional <Jogador> jogador_atualizado = jogadorRepo.findById(id);
+
+        if(jogador_atualizado.isPresent()){
+            return jogador_atualizado;
+        }
+
+        return null;
     }
     
 }
