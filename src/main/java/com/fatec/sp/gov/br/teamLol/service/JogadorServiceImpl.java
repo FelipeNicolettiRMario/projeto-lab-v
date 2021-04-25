@@ -63,5 +63,15 @@ public class JogadorServiceImpl implements JogadorService {
 
         return null;
     }
-    
+
+    @Override
+    public Optional<Jogador> deletarJogador(Long id) {
+
+        Optional<Jogador> jogador = jogadorRepo.findById(id);
+
+         jogadorRepo.deleteJogador(id);
+
+        return jogador;
+
+    }
 }

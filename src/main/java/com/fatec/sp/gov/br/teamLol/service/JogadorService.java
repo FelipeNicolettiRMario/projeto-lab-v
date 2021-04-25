@@ -10,4 +10,6 @@ public interface JogadorService {
     public List<Jogador> buscarTodosJogadores();
 
     public Optional<Jogador> atualizarJogador(String novoNick,String novoElo,Long id);
+
+    public Optional<Jogador> deletarJogador(Long id);
 }

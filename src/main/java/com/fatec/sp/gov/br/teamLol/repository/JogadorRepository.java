@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 public interface JogadorRepository extends JpaRepository<Jogador,Long>{
 
     @Query("SELECT j.time.coach from Jogador j inner join j.time where j.nick = ?1")
@@ -17,6 +19,11 @@ public interface JogadorRepository extends JpaRepository<Jogador,Long>{
     @Modifying
     @Query("UPDATE Jogador j set j.nick = ?1 , j.rank = ?2 where j.id = ?3")
     public void updateJogador(String nick,String rank,Long id);
+
+    @Transactional
+    @Modifying
+    @Query("DELETE Jogador j where j.id = ?1")
+    public void deleteJogador(Long id);
 
     public Jogador findJogadorByNickAndSenha(String nick,String senha);
 

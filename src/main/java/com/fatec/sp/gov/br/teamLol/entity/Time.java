@@ -1,5 +1,8 @@
 package com.fatec.sp.gov.br.teamLol.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fatec.sp.gov.br.teamLol.controller.View;
+
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -22,9 +25,11 @@ public class Time {
     private Long id;
 
     @Column(name = "tme_nome")
+    @JsonView(View.JogadorResumo.class)
     private String nome;
 
     @OneToOne
+    @JsonView(View.JogadorCompleto.class)
     @JoinColumn(name = "tme_coach",referencedColumnName = "cch_id")
     private Coach coach;
 

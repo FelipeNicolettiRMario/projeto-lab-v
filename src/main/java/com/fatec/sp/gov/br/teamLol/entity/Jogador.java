@@ -1,5 +1,8 @@
 package com.fatec.sp.gov.br.teamLol.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fatec.sp.gov.br.teamLol.controller.View;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,11 +19,14 @@ public class Jogador{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "jgd_id")
+    @JsonView(View.JogadorCompleto.class)
     private Long id;
-    
+
+    @JsonView(View.JogadorResumo.class)
     @Column(name = "jgd_nick")
     private String nick;
 
+    @JsonView(View.JogadorResumo.class)
     @Column(name = "jgd_rank")
     private String rank;
 
@@ -28,6 +34,7 @@ public class Jogador{
     private String senha;
 
     @ManyToOne
+    @JsonView(View.JogadorCompleto.class)
     @JoinColumn(name = "jgd_time")
     private Time time;
 
