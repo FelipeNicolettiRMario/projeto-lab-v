@@ -38,8 +38,19 @@ public class Jogador{
     @JoinColumn(name = "jgd_time")
     private Time time;
 
+    @Column(name = "jgd_role")
+    private String role;
+
     public Long getId() {
         return id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public void setId(Long id) {

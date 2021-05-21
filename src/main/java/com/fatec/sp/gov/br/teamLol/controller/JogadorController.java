@@ -18,6 +18,7 @@ public class JogadorController {
     private JogadorService jogadorService;
 
     @GetMapping(value = "/todos")
+    @JsonView(View.JogadorCompleto.class)
     public List<Jogador> buscarTodos(){
         return jogadorService.buscarTodosJogadores();
     }

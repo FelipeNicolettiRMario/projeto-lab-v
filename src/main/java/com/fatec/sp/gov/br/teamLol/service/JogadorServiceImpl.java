@@ -5,8 +5,12 @@ import com.fatec.sp.gov.br.teamLol.entity.Time;
 import com.fatec.sp.gov.br.teamLol.repository.JogadorRepository;
 import com.fatec.sp.gov.br.teamLol.repository.TimeRepository;
 
-import jdk.nashorn.internal.runtime.options.Option;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
@@ -20,6 +24,9 @@ public class JogadorServiceImpl implements JogadorService {
     
     @Autowired
     private TimeRepository timeRepo;
+
+    @Autowired
+    private PasswordEncoder passEncoder;
 
     @Override
     @Transactional
@@ -37,8 +44,9 @@ public class JogadorServiceImpl implements JogadorService {
         Jogador jogador = new Jogador();
         jogador.setNick(nick);
         jogador.setRank(rank);
-        jogador.setSenha(senha);
+        jogador.setSenha(this.passEncoder.encode(senha));
         jogador.setTime(time);
+        jogador.setRole("ROLE_USUARIO");
 
         jogadorRepo.save(jogador);
 
@@ -46,11 +54,13 @@ public class JogadorServiceImpl implements JogadorService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Jogador> buscarTodosJogadores(){
         return jogadorRepo.findAll();
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Optional<Jogador> atualizarJogador(String novoNick,String novoElo,Long id) {
 
         jogadorRepo.updateJogador(novoNick,novoElo,id);
@@ -65,6 +75,7 @@ public class JogadorServiceImpl implements JogadorService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Optional<Jogador> deletarJogador(Long id) {
 
         Optional<Jogador> jogador = jogadorRepo.findById(id);
@@ -73,5 +84,17 @@ public class JogadorServiceImpl implements JogadorService {
 
         return jogador;
 
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        Jogador jogador = jogadorRepo.findJogadorByNick(s);
+        if (jogador == null) {
+            throw new UsernameNotFoundException("Usuario " + s + " não encontrado");
+        }
+        String[] roles = {jogador.getRole()};
+        return User.builder().username(s).password(jogador.getSenha())
+                .authorities(roles)
+                .build();
     }
 }
