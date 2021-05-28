@@ -30,7 +30,7 @@ public class JogadorServiceImpl implements JogadorService {
 
     @Override
     @Transactional
-    public Jogador adicionarJogador(String nick, String rank,String senha,String timeNome) {
+    public Jogador adicionarJogador(String nick,String senha,String rank,String timeNome) {
 
         Time time = timeRepo.findTimeByNome(timeNome);
         

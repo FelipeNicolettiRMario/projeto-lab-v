@@ -1,6 +1,6 @@
 package com.fatec.sp.gov.br.teamLol.security;
 
-public class Login {
+public class  Login {
     private String username;
 
     private String password;
