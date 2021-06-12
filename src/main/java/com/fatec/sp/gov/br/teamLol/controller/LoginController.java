@@ -9,6 +9,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import com.fatec.sp.gov.br.teamLol.repository.JogadorRepository;
+import com.fatec.sp.gov.br.teamLol.entity.Jogador;
+
 @RestController
 @RequestMapping(value = "/login")
 @CrossOrigin
@@ -16,6 +19,9 @@ public class LoginController {
 
     @Autowired
     private AuthenticationManager authManager;
+    
+    @Autowired
+    private JogadorRepository jogadorRep;
 
     @PostMapping()
     public Login autenticar(@RequestBody Login login) {
@@ -23,6 +29,10 @@ public class LoginController {
         Authentication auth = new UsernamePasswordAuthenticationToken(login.getUsername(),login.getPassword());
         auth = authManager.authenticate(auth);
         login.setPassword(null);
+        
+        Jogador jogador = jogadorRep.findJogadorByNick(login.getUsername());
+        login.setAutorizacoes(jogador.getRole());
+
         try {
             login.setToken(JwtUtils.generateToken(auth));
         } catch (JsonProcessingException e) {
