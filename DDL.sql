@@ -28,7 +28,7 @@ create table jgd_jogador(
     jgd_nick varchar(20) not null,
     jgd_rank varchar(30) not null,
     jgd_time bigint,
-    jgd_senha varchar(40) not null,
+    jgd_senha varchar(200) not null,
     jgd_role varchar(50),
     foreign key(jgd_time) references tme_time(tme_id),
     primary key(jgd_id),
